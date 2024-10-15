@@ -3,7 +3,7 @@ package com.bontouch.fluxtimshumam.codecamp24.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Movie(
+data class ApiMovie(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
