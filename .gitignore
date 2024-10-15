@@ -4,6 +4,8 @@
 #local properties
 *.properties
 
+build/
+
 # Log file
 *.log
 
