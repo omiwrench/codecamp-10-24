@@ -15,6 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import codecamp24.composeapp.generated.resources.Res
 import codecamp24.composeapp.generated.resources.compose_multiplatform
+import com.bontouch.fluxtimshumam.codecamp24.model.MoviesResponse
 
 @Composable
 @Preview
@@ -22,8 +23,10 @@ fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         var greeting by remember { mutableStateOf("") }
+        var movies by remember { mutableStateOf<MoviesResponse?>(null) }
         LaunchedEffect(Unit) {
             greeting = Greeting().greet()
+            movies = Greeting().getPopularMovies()
         }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
@@ -33,6 +36,7 @@ fun App() {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
+                    Text("Movies ${movies?.page}")
                 }
             }
         }

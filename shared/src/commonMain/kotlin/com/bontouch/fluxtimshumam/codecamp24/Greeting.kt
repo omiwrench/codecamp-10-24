@@ -2,6 +2,7 @@ package com.bontouch.fluxtimshumam.codecamp24
 
 import com.bontouch.fluxtimshumam.codecamp24.model.MoviesResponse
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.client.plugins.contentnegotiation.*
@@ -33,7 +34,7 @@ class Greeting {
     suspend fun getPopularMovies(): MoviesResponse {
         val path = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
         val response = client.get(path)
-        return response.bodyAsText()
+        return response.body()
     }
 
 }
