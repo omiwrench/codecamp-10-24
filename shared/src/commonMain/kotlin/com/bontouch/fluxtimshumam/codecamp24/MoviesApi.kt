@@ -42,19 +42,16 @@ class MoviesApi {
     }
 
     suspend fun getPopularMovies(): List<ApiMovie> = withContext(Dispatchers.IO) {
-        val response = client.get(V3.Discover.Movie(V3.Discover())).body<MoviesResponse>()
+        val response = client.get(V3.Movie.Popular(V3.Movie())).body<MoviesResponse>()
         response.results
     }
 }
 
 @Resource("/3")
 private object V3 {
-    @Resource("/discover")
-    class Discover(val parent: V3 = V3) {
-        @Resource("/movie")
-        class Movie(val parent: Discover) {
-            @Resource("/popular&page=1")
-            class Popular(val parent: Movie, val language: String = "en-US", val page: Int = 1)
-        }
+    @Resource("/movie")
+    class Movie(val parent: V3 = V3) {
+        @Resource("/popular")
+        class Popular(val parent: Movie, val language: String = "en-US", val page: Int = 1)
     }
 }
